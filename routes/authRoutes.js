@@ -79,4 +79,13 @@ router.post("/profile/:userId", async (req, res) => {
   }
 });
 
+router.get("/:uid", async (req, res) => {
+  const user = await User.findOne({ _id: req.params.uid });
+  if (!user) {
+    return res.status(400).send("No user found.");
+  }
+
+  res.status(200).send(user);
+});
+
 module.exports = router;
