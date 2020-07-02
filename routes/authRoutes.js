@@ -89,7 +89,7 @@ router.get("/:uid", async (req, res) => {
     return res.status(400).send("No User Found");
   }
 
-  res.status(200).send({ ...user, ...profile._doc });
+  res.status(200).send({ ...user._doc, ...profile._doc });
 });
 
 module.exports = router;
