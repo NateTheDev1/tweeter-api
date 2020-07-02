@@ -56,7 +56,7 @@ router.post("/profile/:userId", async (req, res) => {
   const profile = new Profile({
     fullName: req.body.fullName,
     username: req.body.username,
-    avatar: req.body.avatar !== undefined ? req.body.avatar : "",
+    avatar: req.body.avatar,
     createdAt: Date.now(),
     account: account,
   });
