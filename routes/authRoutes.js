@@ -89,14 +89,14 @@ router.get("/:uid", async (req, res) => {
 });
 
 router.get('/profile', (req, res) => {
-  const profile = await profile.findOne({_id: req.body.uid})
+  const profile = await Profile.findOne({ _id: req.body.uid})
 
   if(!profile)
   {
     return res.status(400).send('No Profile found')
   }
 
-  res.status(200).send(profile._doc)
+  res.status(200).send({...profile._doc})
 })
 
 module.exports = router;
