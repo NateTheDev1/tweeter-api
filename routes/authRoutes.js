@@ -84,12 +84,8 @@ router.get("/:uid", async (req, res) => {
   if (!user) {
     return res.status(400).send("No user found.");
   }
-  const profile = await Profile.findOne({ account: req.params.uid });
-  if (!profile) {
-    return res.status(400).send("No User Found");
-  }
 
-  res.status(200).send({ ...user._doc, ...profile._doc });
+  res.status(200).send({ ...user._doc });
 });
 
 module.exports = router;
