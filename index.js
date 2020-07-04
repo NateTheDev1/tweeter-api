@@ -26,6 +26,9 @@ mongoose.connect(
 const authRoutes = require("./routes/authRoutes");
 app.use("/api/user", authRoutes);
 
+const postRoutes = require("./routes/postRoutes");
+app.use("/api/posts", postRoutes);
+
 app.get("/", (req, res) => {
   res.send("Welcome to the tweeter API");
 });

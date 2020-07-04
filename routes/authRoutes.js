@@ -68,7 +68,6 @@ router.post("/profile/:userId", async (req, res) => {
         return res.status(500).send("An error occured, please try again.");
       } else {
         foundUser.hasProfile = true;
-
         foundUser.save();
       }
     });
