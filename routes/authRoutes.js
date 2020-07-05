@@ -97,8 +97,11 @@ router.get("/profile/:uid", async (req, res) => {
   res.status(200).send(profile);
 });
 
-router.get("/post-profile/postedBy", async (req, res) => {
+router.get("/postprofile/:postedBy", async (req, res) => {
   const profile = await Profile.findOne({ account: req.params.postedBy });
+  if (!profile) {
+    return res.status(400).send("No profile found");
+  }
 
   res.status(200).send(profile._doc);
 });
