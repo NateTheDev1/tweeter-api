@@ -97,4 +97,10 @@ router.get("/profile/:uid", async (req, res) => {
   res.status(200).send(profile);
 });
 
+router.get("/post-profile:postedBy", async (req, res) => {
+  const profile = await Profile.findOne({ account: req.params.postedBy });
+
+  res.status(200).send(profile._doc);
+});
+
 module.exports = router;
