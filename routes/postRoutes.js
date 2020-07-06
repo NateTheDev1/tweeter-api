@@ -30,7 +30,7 @@ router.post("/like/:postId", async (req, res) => {
     if (err) {
       return res.status(500).send("No post found");
     } else {
-      foundPost.likedBy.unshift(req.body.userId);
+      foundPost.likedBy.push(req.body.userId);
       foundPost.save();
     }
     return res.status(200).send("Liked");
