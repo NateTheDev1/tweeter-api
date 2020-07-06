@@ -33,14 +33,16 @@ router.post("/like/:postId", async (req, res) => {
       foundPost.likedBy.push(req.body.userId);
       foundPost.save();
     }
-    return res.status(200).send("Liked");
   });
 
-  await Profile.findOne({ _id: req.body.userId }, function (err, foundProfile) {
+  await Profile.findOne({ account: req.body.userId }, function (
+    err,
+    foundProfile
+  ) {
     if (err) {
       return res.status(500).send("No Profile Found");
     } else {
-      foundProfile.likedPosts.unshift(req.params.postId);
+      foundProfile.likedPosts.push(req.params.postId);
       foundProfile.save();
     }
   });

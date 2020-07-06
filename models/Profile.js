@@ -7,7 +7,7 @@ const profileSchema = new mongoose.Schema({
   bio: String,
   createdAt: { type: Date, default: Date.now() },
   account: { type: String, required: true },
-  likedPosts: [{ postId: { type: String, required: true } }],
+  likedPosts: [{ postId: { type: String } }],
 });
 
 module.exports = mongoose.model("Profile", profileSchema);
