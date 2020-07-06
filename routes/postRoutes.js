@@ -4,8 +4,10 @@ const Profile = require("../models/Profile");
 
 router.get("/all", async (req, res) => {
   const allPosts = await Post.find();
-
-  res.status(200).send(allPosts);
+  const sorted = await allPosts
+    .slice()
+    .sort((a, b) => b.createdAt - a.createdAt);
+  res.status(200).send(sorted);
 });
 
 router.post("/new/:userId", async (req, res) => {
