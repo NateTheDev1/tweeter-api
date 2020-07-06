@@ -33,6 +33,7 @@ router.post("/like/:postId", async (req, res) => {
       foundPost.likedBy.unshift(req.body.userId);
       foundPost.save();
     }
+    return res.status(200).send("Liked");
   });
 
   await Profile.findOne({ _id: req.body.userId }, function (err, foundProfile) {
