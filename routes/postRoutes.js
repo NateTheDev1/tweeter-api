@@ -90,4 +90,18 @@ router.get("/:profileId", async (req, res) => {
   res.status(200).send(sorted);
 });
 
+router.delete("/:postId", async (req, res) => {
+  try {
+    const foundPost = await Post.deleteOne({ _id: req.params.postId });
+    if (foundPost.deletedCount === 0) {
+      return res.json(
+        "No posts were deleted, the specified post does not exist."
+      );
+    }
+    res.json(foundPost);
+  } catch (err) {
+    res.status(400).send(err);
+  }
+});
+
 module.exports = router;
