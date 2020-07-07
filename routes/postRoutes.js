@@ -50,4 +50,36 @@ router.post("/like/:postId", async (req, res) => {
   return res.status(200).send("Success");
 });
 
+router.post("/unlike/:postId", async (req, res) => {
+  await Post.findOne({ _id: req.params.postId }, function (err, foundPost) {
+    if (err) {
+      return res.status(500).send("No post found");
+    } else {
+      const newPost = foundPost.likedBy.filter((liked) => {
+        console.log(liked._id, req.body.userId);
+        return liked._id != req.body.userId;
+      });
+      console.log(newPost);
+      foundPost.likedBy = newPost;
+      foundPost.save();
+    }
+  });
+
+  await Profile.findOne({ account: req.body.userId }, function (
+    err,
+    foundProfile
+  ) {
+    if (err) {
+      return res.status(500).send("No Profile Found");
+    } else {
+      const newProfile = foundProfile.likedPosts.filter((like) => {
+        return like._id !== req.params.postId;
+      });
+      foundProfile.likedPosts = newProfile;
+      foundProfile.save();
+    }
+  });
+  return res.status(200).json("Success");
+});
+
 module.exports = router;
