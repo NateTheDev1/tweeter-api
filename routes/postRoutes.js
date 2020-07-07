@@ -82,4 +82,12 @@ router.post("/unlike/:postId", async (req, res) => {
   return res.status(200).json("Success");
 });
 
+router.get("/:profileId", async (req, res) => {
+  const allPosts = await Post.find({ postedBy: req.params.profileId });
+  const sorted = await allPosts
+    .slice()
+    .sort((a, b) => b.createdAt - a.createdAt);
+  res.status(200).send(sorted);
+});
+
 module.exports = router;
