@@ -124,4 +124,13 @@ router.post("/comments", async (req, res) => {
   }
 });
 
+router.delete("/comments/:commentId", async (req, res) => {
+  try {
+    const foundComment = await Comment.deleteOne({ _id: req.params.commentId });
+    res.json(foundComment);
+  } catch (err) {
+    res.status(400).send(err);
+  }
+});
+
 module.exports = router;
