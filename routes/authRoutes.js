@@ -35,12 +35,20 @@ router.post("/login", async (req, res) => {
     return res.status(400).send("Email or password is incorrect.");
   }
 
+  console.log("made it past find one");
+
   const validPass = await bcrypt.compare(req.body.password, user.password);
   if (!validPass) {
     return res.status(400).send("Email or password is incorrect.");
   }
 
+  console.log("made it past valid password");
+
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_KEY);
+
+
+  console.log("made it past token sign");
+  
   res.header("Authorization", token).send({ ...user._doc, token });
 });
 
